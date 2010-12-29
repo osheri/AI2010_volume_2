@@ -1,39 +1,67 @@
 package ai2010v2;
+
+import java.io.Console;
+import java.io.DataInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+
+import org.GNOME.Bonobo.Stream;
+
 /*
  *   Room is a big container [like 30x30] it can contain smaller rooms
- *   Small rooms are not objects by themselves, they're representing 
- *   available space in the big room where pieces of furniture can be placed
- *   every square have "wall flag": if it's opened to l,r,u,d
- *   1  : u
- *   2  : l
- *   4  : d
- *   8  : r
- * 
- * for example: empty square in the middle of the room have flag 0;
- * square in upper-left room corner will have 3;
- * 
- * if at least one of walls have flag, item of furniture cann't move there;
- * if square have wall flag on, adjacent square have opposite corresponding 
- * flag on (1-4; 2-8)
- * 
+ *	
  * 
  * 
  * 
  * 
  * */
 public class Room {
-	public int room[][];
+	public char room[][];
 	
-	public Room()
+	public void Draw()
 	{
-		int i;
-		room = new int[30][30];
-		for(i=0;i<30;i++)
-		{ // Generate outer walls;
-			room[0][i]+=2;
-			room[i][0]+=1;
-			room[29][i]+=8;
-			room[i][29]+=4;
+		int i,j;
+		for (i=0;i<30;i++)
+		{
+			for (j=0;j<30;j++)
+			{
+				System.out.write(room[i][j]);
+			}
+			System.out.write('\n');
 		}
+	}
+	
+	public Room(String filename)
+	{
+		int i,j;
+		char c;
+		File file = new File(filename);
+		FileInputStream fis = null;
+		try 
+		{
+			fis = new FileInputStream(file);
+		}
+		catch(Exception E)
+		{
+			System.out.print("Exception 1");
+		}
+		room = new char[30][30];
+		for (i=0;i<30;i++)
+			for (j=0;j<30;j++)
+				try {
+					c = (char) fis.read();
+					if (c != '\n')
+					room[i][j]=c;
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+	}
+	
+	public static void main(String[]Args)
+	{
+		Room room = new Room("room.txt");
+		room.Draw();
 	}
 }
