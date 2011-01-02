@@ -11,8 +11,8 @@ public class Task {
 	
 	public Task(String source, String destination)
 	{
-		Source = new Room(source);
-		Destination = new Room(destination);
+		Source = new Room(source, true);
+		Destination = new Room(destination, false);
 	}
 	
 	public static void main(String[] args) {
