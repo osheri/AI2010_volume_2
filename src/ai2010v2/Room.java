@@ -1,13 +1,10 @@
 package ai2010v2;
 
-import java.io.Console;
-import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Vector;
 
-import org.GNOME.Bonobo.Stream;
 
 /*
  *   Room is a big container [like 30x30] it can contain smaller rooms
@@ -18,6 +15,7 @@ import org.GNOME.Bonobo.Stream;
  * 
  * */
 public class Room {
+	public boolean isSource;
 	public char room[][];
 	public char PieceFlag[]; 
 	public Vector<Piece> Pieces; 
@@ -34,10 +32,11 @@ public class Room {
 		}
 	}
 	
-	public Room(String filename)
+	public Room(String filename, boolean source)
 	{
 		int i,j;
 		char c;
+		isSource = source;
 		File file = new File(filename);
 		FileInputStream fis = null;
 		try 
@@ -98,7 +97,7 @@ public class Room {
 
 	public static void main(String[]Args)
 	{
-		Room room = new Room("room.txt");
+		Room room = new Room("room.txt", true);
 		room.Draw();
 		for (Piece tmpPiece:room.Pieces)
 		{
