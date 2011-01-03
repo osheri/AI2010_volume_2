@@ -14,6 +14,8 @@ import java.util.Vector;
  * 
  * 
  * */
+
+
 public class Room {
 	public boolean isSource;
 	public char room[][];
@@ -22,12 +24,12 @@ public class Room {
 	
 	public void Draw()
 	{
-		int i,j;
-		for (i=0;i<30;i++)
+		int x,y;
+		for (y=0;y<30;y++)
 		{
-			for (j=0;j<30;j++)
+			for (x=0;x<30;x++)
 			{
-				System.out.write(room[i][j]);
+				System.out.write(room[y][x]);
 			}
 			System.out.write('\n');
 		}
@@ -79,8 +81,8 @@ public class Room {
 						{
 							w++; i1++;
 						}
-						newPiece.x = i;
-						newPiece.y = j;
+						newPiece.x = j;
+						newPiece.y = i;
 						newPiece.w = h;  // I like drugs
 						newPiece.h = w;
 						Pieces.add(newPiece);
@@ -111,11 +113,11 @@ public class Room {
 // Right check
 			for (i=tmpPiece.y; i<tmpPiece.y+tmpPiece.h;i++)
 			{
-					if (room[tmpPiece.x+tmpPiece.w+1][i]!='0') 
+					if (room[i][tmpPiece.x+tmpPiece.w]!='0') 
 					{
 					flag = true;
 					/* add reasons that cann't move */
-					chars.add(room[tmpPiece.x+tmpPiece.w+1][i]);
+					chars.add(room[i][tmpPiece.x+tmpPiece.w]);
 					}
 			}
 			if (!flag)
@@ -133,11 +135,11 @@ public class Room {
 			flag = false;
 			for (i=tmpPiece.y; i<tmpPiece.y+tmpPiece.h;i++)
 			{
-					if (room[tmpPiece.x-1][i]!='0') 
+					if (room[i][tmpPiece.x-1]!='0') 
 					{
 					flag = true;
 					/* add reasons that cann't move */
-					chars.add(room[tmpPiece.x-1][i]);
+					chars.add(room[i][tmpPiece.x-1]);
 					}
 			}
 			if (!flag)
@@ -155,11 +157,11 @@ public class Room {
 			flag = false;
 			for (i=tmpPiece.x; i<tmpPiece.x+tmpPiece.w;i++)
 			{
-					if (room[i][tmpPiece.y-1]!='0') 
+					if (room[tmpPiece.y-1][i]!='0') 
 					{
 					flag = true;
 					/* add reasons that cann't move */
-					chars.add(room[i][tmpPiece.y-1]);
+					chars.add(room[tmpPiece.y-1][i]);
 					}
 			}
 			if (!flag)
@@ -177,12 +179,11 @@ public class Room {
 			flag = false;
 			for (i=tmpPiece.x; i<tmpPiece.x+tmpPiece.w;i++)
 			{
-					if (room[i][tmpPiece.y+tmpPiece.h+1]!='0') 
+				if (room[tmpPiece.y+tmpPiece.h][i]!='0') 
 					{
 					flag = true;
 					/* add reasons that cann't move */
-					chars.add(room[i][tmpPiece.y+tmpPiece.h+1]);
-					System.out.println(i+","+tmpPiece.y+tmpPiece.h+1);
+					chars.add(room[tmpPiece.y+tmpPiece.h][i]);
 					}
 			}
 			if (!flag)

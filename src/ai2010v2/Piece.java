@@ -33,7 +33,11 @@ public class Piece {
 		System.out.println("I am piece " + id +", placed on ("+ x +","+y+"), with size of["+w +","+h+"]");
 		System.out.println("My operators are: ");
 		for (Operator tmpOp:Operators)
+		{
 			System.out.println(tmpOp.type);
+			if (tmpOp.reasons!=null)
+				System.out.println(tmpOp.reasons.toString());
+		}
 	}
 	
 	
