@@ -19,6 +19,7 @@ public class Room {
 	public char room[][];
 	public char PieceFlag[]; 
 	public Vector<Piece> Pieces; 
+	
 	public void Draw()
 	{
 		int i,j;
@@ -95,10 +96,115 @@ public class Room {
 		return false;
 	}
 
+	public void fillOperators()
+	{
+		for (Piece tmpPiece:Pieces)
+		{
+			/*
+			 * check if can move left, right, up and down
+			 * check if can rotate cw, ccw
+			 */
+			int i;
+			boolean flag;
+			flag = false;
+			Vector<Character> chars = new Vector<Character>();
+// Right check
+			for (i=tmpPiece.y; i<tmpPiece.y+tmpPiece.h;i++)
+			{
+					if (room[tmpPiece.x+tmpPiece.w+1][i]!='0') 
+					{
+					flag = true;
+					/* add reasons that cann't move */
+					chars.add(room[tmpPiece.x+tmpPiece.w+1][i]);
+					}
+			}
+			if (!flag)
+			{
+				Operator tmpOp = new Operator("Right");
+				tmpPiece.Operators.add(tmpOp);
+			}
+			else
+			{
+				Operator tmpOp = new Operator("NotRight", chars);
+				tmpPiece.Operators.add(tmpOp);
+			}
+			// Left Check
+			chars.clear();
+			flag = false;
+			for (i=tmpPiece.y; i<tmpPiece.y+tmpPiece.h;i++)
+			{
+					if (room[tmpPiece.x-1][i]!='0') 
+					{
+					flag = true;
+					/* add reasons that cann't move */
+					chars.add(room[tmpPiece.x-1][i]);
+					}
+			}
+			if (!flag)
+			{
+				Operator tmpOp = new Operator("Left");
+				tmpPiece.Operators.add(tmpOp);
+			}
+			else
+			{
+				Operator tmpOp = new Operator("NotLeft", chars);
+				tmpPiece.Operators.add(tmpOp);
+			}
+			// Up Check
+			chars.clear();
+			flag = false;
+			for (i=tmpPiece.x; i<tmpPiece.x+tmpPiece.w;i++)
+			{
+					if (room[i][tmpPiece.y-1]!='0') 
+					{
+					flag = true;
+					/* add reasons that cann't move */
+					chars.add(room[i][tmpPiece.y-1]);
+					}
+			}
+			if (!flag)
+			{
+				Operator tmpOp = new Operator("Up");
+				tmpPiece.Operators.add(tmpOp);
+			}
+			else
+			{
+				Operator tmpOp = new Operator("NotUp", chars);
+				tmpPiece.Operators.add(tmpOp);
+			}
+			// Down Check
+			chars.clear();
+			flag = false;
+			for (i=tmpPiece.x; i<tmpPiece.x+tmpPiece.w;i++)
+			{
+					if (room[i][tmpPiece.y+tmpPiece.h+1]!='0') 
+					{
+					flag = true;
+					/* add reasons that cann't move */
+					chars.add(room[i][tmpPiece.y+tmpPiece.h+1]);
+					System.out.println(i+","+tmpPiece.y+tmpPiece.h+1);
+					}
+			}
+			if (!flag)
+			{
+				Operator tmpOp = new Operator("Down");
+				tmpPiece.Operators.add(tmpOp);
+			}
+			else
+			{
+				Operator tmpOp = new Operator("NotDown", chars);
+				tmpPiece.Operators.add(tmpOp);
+			}
+		}
+
+		
+	}
+	
 	public static void main(String[]Args)
 	{
 		Room room = new Room("room.txt", true);
 		room.Draw();
+		room.fillOperators();
 		for (Piece tmpPiece:room.Pieces)
 		{
 			tmpPiece.Draw();

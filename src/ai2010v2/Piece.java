@@ -25,17 +25,17 @@ public class Piece {
 	Piece(int ID)
 	{
 		id=ID;
-		
+		Operators = new Vector<Operator>();
 	}
 	public void Draw()
 	{
 		
 		System.out.println("I am piece " + id +", placed on ("+ x +","+y+"), with size of["+w +","+h+"]");
+		System.out.println("My operators are: ");
+		for (Operator tmpOp:Operators)
+			System.out.println(tmpOp.type);
 	}
 	
-	public boolean CanMoveLeft()
-	{
-		return true;
-	}
+	
 	
 }
