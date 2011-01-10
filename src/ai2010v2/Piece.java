@@ -2,7 +2,7 @@ package ai2010v2;
 
 import java.util.Vector;
 
-import sun.io.Converters;
+
 
 /*
  *    Piece is rectangular piece of furniture.

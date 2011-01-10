@@ -1,5 +1,5 @@
 package ai2010v2;
 
-public class Predicate {
+public class Predicate extends Item{
 
 }

@@ -10,7 +10,7 @@ import java.util.Vector;
  * do not need to do double check
  * 
  */
-public class Operator {
+public class Operator extends Item{
 	public String type;  /* Possible values: Right Left Up Down Cw Ccw MoveTo*/
 	public int[] params; /* if type=='MoveTo', params = [x,y]*/
 	public Vector<Character> reasons;
@@ -30,6 +30,10 @@ public class Operator {
 	{
 		type = Type;
 		reasons = new Vector<Character>(Reasons);
+	}
+	
+	public void make(Room room, Piece piece)
+	{
 		
 	}
 }
