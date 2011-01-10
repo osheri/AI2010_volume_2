@@ -11,13 +11,17 @@ import java.util.Vector;
  * 
  */
 public class Operator extends Item{
-	public String type;  /* Possible values: Right Left Up Down Cw Ccw MoveTo*/
+	// moved to super class 
+	// public String type;  /* Possible values: Right Left Up Down Cw Ccw MoveTo*/
 	public int[] params; /* if type=='MoveTo', params = [x,y]*/
 	public Vector<Character> reasons;
+	public Vector<Predicate> Preconditions;
+	public Vector<Predicate> Postconditions;
 	
 	public Operator(String Type)
 	{
 		type = Type;
+		
 	}
 	
 	public Operator(String Type, int[] Params)
@@ -32,7 +36,18 @@ public class Operator extends Item{
 		reasons = new Vector<Character>(Reasons);
 	}
 	
-	public void make(Room room, Piece piece)
+	public void AddPre(Predicate pred)
+	{
+		
+	}
+	
+	public void AddPost(Predicate post)
+	{
+		
+		
+	}
+	
+	public void execute(Room room, Piece piece)
 	{
 		
 	}
